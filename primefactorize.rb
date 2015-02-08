@@ -25,8 +25,8 @@ if __FILE__ == $0
   if ARGV.length > 0
     input = ARGV[0].to_i
   else
-    # For Euler Project problem number 3
-    input=600851475143 # Should be 6857
+    puts "Usage"
+    exit
   end
   factors = primefactorize(input)
   p factors
