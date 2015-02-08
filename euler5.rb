@@ -29,7 +29,10 @@ p leastcommonmultiple(2..maxnumber)
 
 # Or just use the built-in lcm method. Cheating but it works!
 # My routine is actually faster than this for larger numbers.
-# For maxnumber=10000, mine ran in 89ms vs 114ms built-in on a macbook pro.
+# For maxnumber=100000, mine ran in 1 second vs 6 seconds for built-in function
+# on a macbook pro.
 require 'rational'
 x =* 2..maxnumber
 p x.reduce(:lcm)
+#lcmval = 1; x.each { |i| lcmval = lcmval.lcm(i) }; p lcmval  # Same as reduce.
+
