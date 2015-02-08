@@ -18,21 +18,24 @@ def leastcommonmultiple(iterable)
     curr = primefactorize(i)
     curr.each_key { |k| factors[k] = [factors[k], curr[k]].max }
   end
-  #p factors
   lcm = 1
   factors.each_pair { |k,v| lcm*=k**v }
+  #p factors
   return lcm
 end
 
 maxnumber = 20  # Should be 232792560
 p leastcommonmultiple(2..maxnumber)
 
-# Or just use the built-in lcm method. Cheating but it works!
-# My routine is actually faster than this for larger numbers.
+# Or just use the built-in lcm method. It's a bit cheating because no thought
+# is required, but it works!
+#
+# My routine is actually faster than this for larger numbers, probably because
+# it keeps the running list of primes instead of just keeping the running
+# value of the least common multiple.
 # For maxnumber=100000, mine ran in 1 second vs 6 seconds for built-in function
 # on a macbook pro.
 require 'rational'
 x =* 2..maxnumber
 p x.reduce(:lcm)
-#lcmval = 1; x.each { |i| lcmval = lcmval.lcm(i) }; p lcmval  # Same as reduce.
 
