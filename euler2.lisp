@@ -1,5 +1,7 @@
 ; Sum of even fibonacci terms below four million
+
 (defvar cutoff (* 4 (expt 10 6)))
+;(defvar cutoff (* 4 (expt 10 (expt 2 16))))  ; Takes noticeable time.
 
 (defun fibsum (valmax &optional (runsum 0) (prev1 1) (prev2 1))
   (let ((curr (+ prev1 prev2)))
