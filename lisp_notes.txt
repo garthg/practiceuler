@@ -1,0 +1,5 @@
+To run program:
+sbcl --script <program.lisp>
+
+To install:
+brew install sbcl
