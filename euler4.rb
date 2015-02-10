@@ -32,14 +32,13 @@ def maxpalindrome(digits)
 end
 
 digits = 3  # Should be 906609
-#digits = 4
+#digits = 5
 #digits = 2
 p maxpalindrome(digits)
 
 
 # Build a list of all the 3-digit products. Sort them. Check for palindromes
 # from top to bottom. O( n^2 log n )
-# Takes 15 seconds for 4 digits on macbook pro.
 def maxpalindrome2(digits)
   minfactor = 10**(digits-1)
   maxfactor = 10**digits-1
