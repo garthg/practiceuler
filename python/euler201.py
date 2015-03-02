@@ -1,3 +1,5 @@
+# This is a bit too slow: it takes 2-3 minutes for input size 100.
+
 # Model is sums x numpositive, update for each letter
 
 # Initialize with all empty dicts
@@ -21,8 +23,8 @@ import collections
 import copy
 
 
-gensize = 100  # Should be 115039000 in ~150 seconds
-#gensize = 50  # Should be 7383100 in ~5 seconds
+#gensize = 100  # Should be 115039000 in ~150 seconds
+gensize = 50  # Should be 7383100 in ~5 seconds
 #gensize = 35  # Should be 1461465 in ~1 seconds
 letters = [i*i for i in range(1, gensize+1)]
 #letters = [1,3,6,8,10,11]  # Should be 156
