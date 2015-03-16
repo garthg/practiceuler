@@ -1,0 +1,10 @@
+(defun ackermann (m n) 
+  (if (= m 0) (+ n 1) 
+    (if (and (> m 0) (= n 0)) (ackermann (1- m) 1) 
+      (if (and (> m 0) (> n 0)) (ackermann (1- m) (ackermann m (1- n)))
+        -1))))
+
+(defvar m 3)
+(defvar n 9)
+(defvar res (ackermann m n))
+(print res)
