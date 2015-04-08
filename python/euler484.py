@@ -52,7 +52,6 @@ class Derivative(object):
       return 1
     divisor = max(factor_dict.keys())
     other = n//divisor
-    #return 0
     return self.derivative(divisor)*other + divisor*self.derivative(other)
 
   def derivative(self, n):
@@ -67,9 +66,12 @@ class Derivative(object):
 def gcd(a, b):
   f_a = Factorize.factorize(a)
   f_b = Factorize.factorize(b)
-  common = set(f_a.keys()).intersection(f_b.keys())
-  if not common: return 1
-  return max(common)
+  res = 1
+  for f in f_a:
+    if f in f_b:
+      m = min(f_a[f], f_b[f])
+      res *= f**m
+  return res
 
 
 if __name__ == '__main__':
@@ -81,11 +83,12 @@ if __name__ == '__main__':
   #print f.prime_cache
   #d = Derivative()
   #print d.derivative(int(sys.argv[1]))
-  
+
   #kmax = 10
   #kmax = 5*10**5
-  exp = int(sys.argv[1])
-  kmax = 5*10**exp
+  #exp = int(sys.argv[1])
+  #kmax = 5*10**exp
+  kmax = int(sys.argv[1])
   cumsum = 0
   starttime = datetime.utcnow()
   d = Derivative()
@@ -98,9 +101,11 @@ if __name__ == '__main__':
     gcds.append(curr)
     cumsum += curr
     #cumsum += k
-  print '5 * 10^%d = %d' % (exp, kmax)
+  #print '5 * 10^%d = %d' % (exp, kmax)
   print 'Loops: %d' % Factorize.loop_count
   print str(datetime.utcnow() - starttime)
   print gcds
   print cumsum
+  if len(sys.argv) > 2:
+    print gcds[int(sys.argv[2])-1]
 
