@@ -9,3 +9,10 @@ func Pow_int_to_int(base int, exp int) int {
 func Pow_10_to_int(exp int) int {
 	return Pow_int_to_int(10, exp)
 }
+
+func Max_int(x int, y int) int {
+	if y > x {
+		return y
+	}
+	return x
+}
