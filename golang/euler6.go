@@ -6,12 +6,8 @@ import (
 	"fmt"
 )
 
-import (
-	"./numberutil"
-)
-
 func squared(x int) int {
-	return numberutil.Pow_int_to_int(x, 2)
+	return x * x
 }
 
 func euler6(input_max int) int {
