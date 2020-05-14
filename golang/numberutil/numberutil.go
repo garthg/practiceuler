@@ -3,6 +3,16 @@ package numberutil
 import "math"
 
 func Pow_int_to_int(base int, exp int) int {
+	if exp == 0 {
+		return 1
+	}
+	if exp > 0 {
+		out := base
+		for i := 1; i < exp; i++ {
+			out *= base
+		}
+		return base
+	}
 	return int(math.Pow(float64(base), float64(exp)))
 }
 
@@ -15,4 +25,8 @@ func Max_int(x int, y int) int {
 		return y
 	}
 	return x
+}
+
+func Squared_int(base int) int {
+	return base * base
 }
