@@ -77,9 +77,12 @@ func euler9(target_sum int) int {
 	// Compute the minimum and maximum using what we derived above.
 	m_min := int(math.Ceil(math.Sqrt(half_target_sum_f / 2.0)))
 	m_max := int(math.Floor(math.Sqrt(half_target_sum_f)))
+	// Boundaries are strictly greater or less than square roots, so if it's a perfect square, have to go one number up or down.
 	if m_max*m_max == half_target_sum {
-		// Boundary is that m is strictly less than sqrt of half the target, so if it's a perfect square, we have to subtract one.
 		m_max--
+	}
+	if m_min*m_min == half_target_sum/2 {
+		m_min++
 	}
 	// Then iterate over that space, checking for even divisors. If we don't find one, there is no triple.
 	found := false
