@@ -33,8 +33,8 @@
 //   m > 500/m - m
 //   2m > 500/m
 //   2m^2 > 500
-//   sqrt(2)*m > sqrt(500)
-//   m > sqrt(500) / sqrt(2)
+//   m^2 > 250
+//   m > sqrt(250)
 //
 // Find a maximum for m:
 //   0 < n
@@ -75,7 +75,7 @@ func euler9(target_sum int) int {
 	half_target_sum := target_sum / 2
 	half_target_sum_f := float64(half_target_sum)
 	// Compute the minimum and maximum using what we derived above.
-	m_min := int(math.Ceil(math.Sqrt(half_target_sum_f) / math.Sqrt(2.0)))
+	m_min := int(math.Ceil(math.Sqrt(half_target_sum_f / 2.0)))
 	m_max := int(math.Floor(math.Sqrt(half_target_sum_f)))
 	if m_max*m_max == half_target_sum {
 		// Boundary is that m is strictly less than sqrt of half the target, so if it's a perfect square, we have to subtract one.
