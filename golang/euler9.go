@@ -6,7 +6,7 @@
 //   a^2 + b^2 = c^2
 //   a + b + c = 1000
 //
-// We can construct Pythagorean triples:
+// We can construct Pythagorean triples as follows:
 // For two positive integers m and n where m > n
 // a = m^2 - n^2
 // b = 2mn
@@ -26,9 +26,9 @@
 // m(m+n) = 500
 //
 // Now our algorithm can be to find integers m and n such that m(m+n) = 500
-// We know that n = 500/m - m , so we just need to choose an m
+// We know that n = 500/m - m , so we just need to choose an m, and we can set some bounds on m.
 //
-// Set a minimum for m:
+// Find a minimum for m:
 //   m > n
 //   m > 500/m - m
 //   2m > 500/m
@@ -36,7 +36,7 @@
 //   sqrt(2)*m > sqrt(500)
 //   m > sqrt(500) / sqrt(2)
 //
-// Set a maximum for m:
+// Find a maximum for m:
 //   0 < n
 //   0 < 500/m - m
 //   m < 500/m
@@ -69,15 +69,14 @@ func euler9(target_sum int) int {
 	var m, n, a, b, c int
 	half_target_sum := target_sum / 2
 	half_target_sum_f := float64(half_target_sum)
-	// Compute the minimum using the equation we derived
-	m_min := int(math.Floor(math.Sqrt(half_target_sum_f) / math.Sqrt(2.0)))
-	// Set m to the maximum initially
-	m = int(math.Floor(math.Sqrt(half_target_sum_f)))
-	if m*m == half_target_sum {
-		// Boundary is that m is strictly less than sqrt of half tthe target, so if it's a perfect square, we have to subtract one.
-		m--
+	// Compute the minimum and maximum using what we derived above.
+	m_min := int(math.Ceil(math.Sqrt(half_target_sum_f) / math.Sqrt(2.0)))
+	m_max := int(math.Floor(math.Sqrt(half_target_sum_f)))
+	if m_max*m_max == half_target_sum {
+		// Boundary is that m is strictly less than sqrt of half the target, so if it's a perfect square, we have to subtract one.
+		m_max--
 	}
-	for m > m_min {
+	for m = m_min; m <= m_max; m++ {
 		if half_target_sum%m == 0 {
 			n = half_target_sum/m - m
 			a = m*m - n*n
@@ -92,8 +91,9 @@ func euler9(target_sum int) int {
 				fmt.Println("you screwed up the math: it doesn't add up to the target")
 				return -1
 			}
+			// If there are multiple, return the smallest. Are there ever multiple?
+			break
 		}
-		m--
 	}
 	if m == 0 {
 		fmt.Println("there are no Python triples (or the algorithm failed)")
@@ -108,7 +108,6 @@ func euler9(target_sum int) int {
 }
 
 func main() {
-	fmt.Println(euler9(4))
 	fmt.Println(euler9(12))
 	fmt.Println(euler9(1000))
 }
