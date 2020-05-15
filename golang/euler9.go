@@ -56,10 +56,8 @@ import (
 )
 
 func euler9(target_sum int) int {
-	// Find m and n such that m(m+n) = 500
-	// Reason that m is going to be near the square root of 500, so start there and look for even divisors nearby.
 	if target_sum < 4 {
-		fmt.Println("cannot have a 1 1 1 right triangle")
+		fmt.Println("cannot have a sum below 4 (no 1 1 1 right triangle)")
 		return -1
 	}
 	if target_sum%2 != 0 {
