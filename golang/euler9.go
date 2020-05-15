@@ -43,6 +43,13 @@
 //   m^2 < 500
 //   m < sqrt(500)
 //
+// We also know that the minimum m and n in general is m=2 and n=1 because those are the smallest positive integers with m>n.
+// Thus, the smallest a b and c are:
+//   a = m^2 - n^2 = 4 - 1 = 3
+//   b = 2mn = 2*2*1 = 4
+//   c = m^2 + n^2 = 4 + 1 = 5
+// So the smallest possible sum a+b+c is 3+4+5 = 12
+//
 // Also, we know that a Pythagorean triple always sums to an even number, because:
 // if a and b are both even, then: a^2 + b^2 = even*even + even*even = even + even = even --> all even so a+b+c = even+even+even = even
 // if a and b are both odd, then: a^2 + b^2 = odd*odd + odd*odd = odd + odd = even --> a+b+c = odd+odd+even = even
@@ -56,8 +63,8 @@ import (
 )
 
 func euler9(target_sum int) int {
-	if target_sum < 4 {
-		fmt.Println("cannot have a sum below 4 (no 1 1 1 right triangle)")
+	if target_sum < 12 {
+		fmt.Println("cannot have a Pythagorean triple with a sum below 12")
 		return -1
 	}
 	if target_sum%2 != 0 {
@@ -75,9 +82,10 @@ func euler9(target_sum int) int {
 		m_max--
 	}
 	// Then iterate over that space, checking for even divisors. If we don't find one, there is no triple.
-	m = 0
+	found := false
 	for m = m_min; m <= m_max; m++ {
 		if half_target_sum%m == 0 {
+			found = true
 			n = half_target_sum/m - m
 			a = m*m - n*n
 			b = 2 * m * n
@@ -95,12 +103,17 @@ func euler9(target_sum int) int {
 			break
 		}
 	}
+	if !found {
+		fmt.Println("no Pythagorean triples with that sum")
+		return -1
+	}
 	if m == 0 {
-		fmt.Println("there are no Pythagorean triples (or the algorithm failed)")
+		// This should never happen, but we can check just to be extra sure.
+		fmt.Println("there are no Pythagorean triples (or the algorithm failed: m=0)")
 		return -1
 	}
 	if a < 1 || b < 1 || c < 1 {
-		fmt.Println("there are no Pythagorean triples (or the algorithm failed)")
+		fmt.Println("there are no Pythagorean triples (or the algorithm failed: one of a b c is < 1)")
 		return -1
 	}
 	product := a * b * c
