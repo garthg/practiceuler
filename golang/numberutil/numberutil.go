@@ -7,11 +7,12 @@ func Pow_int_to_int(base int, exp int) int {
 		return 1
 	}
 	if exp > 0 {
-		out := base
-		for i := 1; i < exp; i++ {
+		// I don't actually know if this is faster than the casting.
+		out := 1
+		for i := 1; i <= exp; i++ {
 			out *= base
 		}
-		return base
+		return out
 	}
 	return int(math.Pow(float64(base), float64(exp)))
 }
