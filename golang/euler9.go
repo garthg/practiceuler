@@ -76,6 +76,8 @@ func euler9(target_sum int) int {
 		// Boundary is that m is strictly less than sqrt of half the target, so if it's a perfect square, we have to subtract one.
 		m_max--
 	}
+	// Then iterate over that space, checking for even divisors. If we don't find one, there is no triple.
+	m = 0
 	for m = m_min; m <= m_max; m++ {
 		if half_target_sum%m == 0 {
 			n = half_target_sum/m - m
@@ -91,19 +93,19 @@ func euler9(target_sum int) int {
 				fmt.Println("you screwed up the math: it doesn't add up to the target")
 				return -1
 			}
-			// If there are multiple, return the smallest. Are there ever multiple?
+			// If there are multiple, return the smallest by breaking here. Are there ever multiple?
 			break
 		}
 	}
 	if m == 0 {
-		fmt.Println("there are no Python triples (or the algorithm failed)")
+		fmt.Println("there are no Pythagorean triples (or the algorithm failed)")
+		return -1
+	}
+	if a < 1 || b < 1 || c < 1 {
+		fmt.Println("there are no Pythagorean triples (or the algorithm failed)")
 		return -1
 	}
 	product := a * b * c
-	if product == 0 {
-		fmt.Println("there are no Python triples (or the algorithm failed)")
-		return -1
-	}
 	return product
 }
 
